@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/projectai/static/css/main.9f453497.css",
-    "main.js": "/projectai/static/js/main.9310a517.js",
+    "main.css": "/projectai/static/css/main.ac9a1128.css",
+    "main.js": "/projectai/static/js/main.f45377d7.js",
     "index.html": "/projectai/index.html",
-    "main.9f453497.css.map": "/projectai/static/css/main.9f453497.css.map",
-    "main.9310a517.js.map": "/projectai/static/js/main.9310a517.js.map"
+    "main.ac9a1128.css.map": "/projectai/static/css/main.ac9a1128.css.map",
+    "main.f45377d7.js.map": "/projectai/static/js/main.f45377d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.9f453497.css",
-    "static/js/main.9310a517.js"
+    "static/css/main.ac9a1128.css",
+    "static/js/main.f45377d7.js"
   ]
 }
