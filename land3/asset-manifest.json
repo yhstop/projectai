@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/projectai/land3/static/css/main.e6c13ad2.css",
+    "main.js": "/projectai/land3/static/js/main.f979a509.js",
+    "index.html": "/projectai/land3/index.html",
+    "main.e6c13ad2.css.map": "/projectai/land3/static/css/main.e6c13ad2.css.map",
+    "main.f979a509.js.map": "/projectai/land3/static/js/main.f979a509.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.f979a509.js"
+  ]
+}
