@@ -1,0 +1,45 @@
+@charset "utf-8";
+body{
+    background-color: #111111;
+}
+
+*{margin: 0;padding: 0;}
+
+.formbox{
+    width: 930px;
+    margin: 140px auto 0;
+}
+input[type="text"]{
+   width: 930px;
+   height: 58px;
+   background-color: #262626; 
+   margin-bottom: 32px;
+   border: none;
+   /* 들여쓰기 */
+   text-indent: 16px;
+}
+
+textarea{
+    width: 930px;
+    height: 185px;
+    background-color: #262626;
+    padding: 26px;
+    /* padding으로 늘려도 원래 사이즈 고정 */
+    box-sizing: border-box;
+    margin-bottom: 45px;
+    
+
+}
+.btn{
+    padding: 24px 64px;
+    background-color: #ff0050;
+    color: #ffffff;
+    font-weight: 900;
+    border: none;
+    /* 테두리 라운드 하기 */
+    border-radius: 10px;
+    font-size: 18px;
+    /* 버튼에 손모양 나오게 해주는 명령 */
+    cursor: pointer;
+}
+
