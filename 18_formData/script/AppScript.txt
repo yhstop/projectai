@@ -1,0 +1,50 @@
+// 변수 선언
+var sheetName = 'Sheet1'   // 데이터가 추가될 시트의 이름입니다. 
+var scriptProp = PropertiesService.getScriptProperties()   // 스크립트 속성에 접근하기 위해 사용되는 객체입니다. 스프레드 시트의 ID를 저장합니다.  
+
+
+// 스프레드 시트와 스크립트를 초기화합니다. 스프레드 시트의 ID를 가져와 'scriptProp'에 key로 저장합니다. 
+function intialSetup () {
+  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+// 웹에서 POST 요청을 받아 처리합니다.
+function doPost (e) {
+  var lock = LockService.getScriptLock()   // 동시에 여러 사용자가 스프레드 시트에 데이터를 추가할 때 데이터 충돌을 방지합니다. 
+  lock.tryLock(10000)   // 10초 동안 잠금을 시도합니다. 
+
+  try {
+    var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))    // key로 저장된 ID를 이용하여 스프레드 시트를 엽니다.  
+    var sheet = doc.getSheetByName(sheetName)   // 'sheetName'라고 저장된 시트를 가져옵니다. 
+
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]   // 첫번째 행의 헤더 정보(Name, Email, Message)를 가져와 'headers'에 저장합니다. 
+    var nextRow = sheet.getLastRow() + 1   // 다음 행 번호를 계산합니다. 이 곳에 새 데이터를 추가합니다. 
+
+    // headers 배열의 각 헤더에 대해 함수를 실행합니다. 헤더가 'timestamp'라면 현재 날짜와 시간을 반환하고, 그렇지 않으면 POST 요청에서 전달된 해당 헤더 값을 반환합니다.
+    var newRow = headers.map(function(header) {
+      return header === 'timestamp' ? new Date() : e.parameter[header]   
+    })
+
+    // 계산된 'nextRow'행에 'newRow' 배열의 값을 추가합니다. 
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+    
+	// 처리되면 'success'와 'nextRow'를 JSON 형식으로 반환하고, 반환되는 내용의 MIME 타입을 JSON으로 설정합니다.
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+  
+  // 예외가 발생하면 실행됩니다. 'e'는 발생한 예외 객체를 참조합니다. 
+  catch (e) {
+    // ContentService를 사용하여 오류 메시지를 JSON 형식의 텍스트로 만듭니다. 'result'는 'error'로 설정되고, 예외 메시지는 'error' 키에 연결됩니다
+    return ContentService                                          
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))    
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  // 마지막으로 잠금을 해제합니다. 
+  finally {
+    lock.releaseLock()
+  }
+}
