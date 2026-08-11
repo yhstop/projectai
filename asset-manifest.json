@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/projectai/static/css/main.0545eaf9.css",
-    "main.js": "/projectai/static/js/main.566e4529.js",
+    "main.js": "/projectai/static/js/main.e1484c7f.js",
     "index.html": "/projectai/index.html",
     "main.0545eaf9.css.map": "/projectai/static/css/main.0545eaf9.css.map",
-    "main.566e4529.js.map": "/projectai/static/js/main.566e4529.js.map"
+    "main.e1484c7f.js.map": "/projectai/static/js/main.e1484c7f.js.map"
   },
   "entrypoints": [
     "static/css/main.0545eaf9.css",
-    "static/js/main.566e4529.js"
+    "static/js/main.e1484c7f.js"
   ]
 }
